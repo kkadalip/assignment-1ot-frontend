@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Suspense} from 'react'; // Component
+import React, {Suspense, useEffect, useState} from 'react'; // Component // useState
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -6,12 +6,12 @@ import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {ColumnGroup} from 'primereact/columngroup';
 import {Row} from 'primereact/row';
-import {DataService} from './service/DataService';
+// import {DataService} from './service/DataService';
 import {ProgressSpinner} from 'primereact/progressspinner';
 import {SelectButton} from 'primereact/selectbutton';
 import {TabMenu} from 'primereact/tabmenu';
 import {useTranslation} from 'react-i18next';
-import i18n from './translations/i18n';
+// import i18n from './translations/i18n';
 import {Table} from 'reactstrap';
 import 'react-icons-weather/lib/css/weather-icons.css';
 import * as h from "./service/IndexHelper";
@@ -78,35 +78,40 @@ function Page() {
         <ColumnGroup>
             <Row>
                 <Column header="" colSpan={1}/>
-                <Column header="Geo" colSpan={2}/>
-                <Column header="Info" colSpan={5}/>
-                <Column header="Air" colSpan={3}/>
-                <Column header="Water" colSpan={3}/>
-                <Column header="Wind" colSpan={6}/>
+                <Column header={t('header.geo')} colSpan={2}/>
+                <Column header={t('header.info')} colSpan={5}/>
+                <Column header={t('header.air')} colSpan={3}/>
+                <Column header={t('header.water')} colSpan={3}/>
+                <Column header={t('header.wind')} colSpan={5}/>
             </Row>
             <Row>
-                <Column key={'name'} field={'name'} header={'Name'} sortable="true"/>
-                <Column key={'longitude'} field={'longitude'} header={'Longitute'} sortable="true"/>
-                <Column key={'latitude'} field={'latitude'} header={'Latitude'} sortable="true"/>
-                <Column key={'phenomenon'} field={'phenomenon'} header={'Phenomenon'} sortable="true"/>
-                <Column key={'visibility'} field={'visibility'} header={'Visibility (km)'} sortable="true"/>
-                <Column key={'precipitations'} field={'precipitations'} header={'Precipitations'} sortable="true"/>
-                <Column key={'uvIndex'} field={'uvIndex'} header={'UV index'} sortable="true"/>
-                <Column key={'wmoCode'} field={'wmoCode'} header={'WMO code'} sortable="true"/>
-                <Column key={'airPressure'} field={'airPressure'} header={'Pressure (hPa)'} sortable="true"/>
-                <Column key={'relativeHumidity'} field={'relativeHumidity'} header={'Relative humidity (%)'}
+                <Column key={'name'} field={'name'} header={t('station.full.name')} sortable="true"/>
+                <Column key={'latitude'} field={'latitude'} header={t('station.full.latitude')} sortable="true"/>
+                <Column key={'longitude'} field={'longitude'} header={t('station.full.longitude')} sortable="true"/>
+                <Column key={'phenomenon'} field={'phenomenon'} header={t('station.full.phenomenon')} sortable="true"/>
+                <Column key={'visibility'} field={'visibility'} header={t('station.full.visibility')} sortable="true"/>
+                <Column key={'precipitations'} field={'precipitations'} header={t('station.full.precipitations')}
                         sortable="true"/>
-                <Column field={'airTemperature'} header={'Temperature'} sortable="true"/>
-                <Column key={'waterLevel'} field={'waterLevel'} header={'Level (cm)'} sortable="true"/>
-                <Column key={'waterLevelEh2000'} field={'waterLevelEh2000'} header={'Level EH2000 (cm)'}
+                <Column key={'uvIndex'} field={'uvIndex'} header={t('station.full.uvIndex')} sortable="true"/>
+                <Column key={'wmoCode'} field={'wmoCode'} header={t('station.full.wmoCode')} sortable="true"/>
+                <Column key={'airPressure'} field={'airPressure'} header={t('station.full.airPressure')}
                         sortable="true"/>
-                <Column key={'waterTemperature'} field={'waterTemperature'} header={'Temp (°C)'} sortable="true"/>
-                <Column key={'windDirection'} field={'windDirection'} header={'Direction'} sortable="true"/>
-                <Column key={'windSpeed'} field={'windSpeed'} header={'Speed'} sortable="true"/>
-                <Column key={'windSpeedMax'} field={'windSpeedMax'} header={'Speed max'} sortable="true"/>
-                <Column key={'windChillC'} field={'windChillC'} header={'Chill'} sortable="true"/>
-                <Column key={'windChillMaxC'} field={'windChillMaxC'} header={'Chill Max'} sortable="true"/>
-                <Column key={'windChillMaxF'} field={'windChillMaxF'} header={'Chill Max'} sortable="true"/>
+                <Column key={'relativeHumidity'} field={'relativeHumidity'} header={t('station.full.relativeHumidity')}
+                        sortable="true"/>
+                <Column field={'airTemperature'} header={t('station.full.airTemperature')} sortable="true"/>
+                <Column key={'waterLevel'} field={'waterLevel'} header={t('station.full.waterLevel')} sortable="true"/>
+                <Column key={'waterLevelEh2000'} field={'waterLevelEh2000'} header={t('station.full.waterLevelEh2000')}
+                        sortable="true"/>
+                <Column key={'waterTemperature'} field={'waterTemperature'} header={t('station.full.waterTemperature')}
+                        sortable="true"/>
+                <Column key={'windDirection'} field={'windDirection'} header={t('station.full.windDirection')}
+                        sortable="true"/>
+                <Column key={'windSpeed'} field={'windSpeed'} header={t('station.full.windSpeed')} sortable="true"/>
+                <Column key={'windSpeedMax'} field={'windSpeedMax'} header={t('station.full.windSpeedMax')}
+                        sortable="true"/>
+                <Column key={'windChillC'} field={'windChillC'} header={t('station.full.windChillC')} sortable="true"/>
+                <Column key={'windChillMaxC'} field={'windChillMaxC'} header={t('station.full.windChillMaxC')}
+                        sortable="true"/>
             </Row>
         </ColumnGroup>;
 
@@ -127,24 +132,114 @@ function Page() {
         return <span/>;
     }
 
+    function getGoogleMapsUrl(latitude, longitude) {
+        return 'http://www.google.com/maps/place/' + latitude + ',' + longitude;
+    }
+
+    const bodyLatitude = (rowData) => {
+        if (rowData.latitude && rowData.longitude) {
+            return <span><a
+                href={getGoogleMapsUrl(rowData.latitude, rowData.longitude)}>{rowData.latitude}{'°'}</a></span>
+        } else if (rowData.latitude) {
+            return <span>{rowData.latitude}{'°'}</span>
+        }
+        return <span/>;
+    }
+    const bodyLongitude = (rowData) => {
+        if (rowData.latitude && rowData.longitude) {
+            return <span><a
+                href={getGoogleMapsUrl(rowData.latitude, rowData.longitude)}>{rowData.longitude}{'°'}</a></span>
+        } else if (rowData.longitude) {
+            return <span>{rowData.longitude}{'°'}</span>
+        }
+        return <span/>;
+    }
+    const bodyVisibility = (rowData) => {
+        return combine(rowData.visibility, 'km');
+    }
+    const bodyPrecipitations = (rowData) => {
+        return combine(rowData.precipitations, 'mm');
+    }
+    const bodyAirPressure = (rowData) => {
+        return combine(rowData.airPressure, 'hPa');
+    }
+    const bodyRelativeHumidity = (rowData) => {
+        return combine(rowData.relativeHumidity, '%');
+    }
+    const bodyWaterLevel = (rowData) => {
+        return combine(rowData.waterLevel, 'cm');
+    }
+    const bodyWaterLevelEh2000 = (rowData) => {
+        return combine(rowData.waterLevelEh2000, 'cm');
+    }
+    const bodyWaterTemp = (rowData) => {
+        return combine(rowData.waterTemperature, '°C');
+    }
     const bodyAirTemp = (rowData) => {
         return combine(rowData.airTemperature, '°C');
+    };
+    const bodyWindDirection = (rowData) => {
+        const degrees = rowData.windDirection;
+        let word = '';
+        if (degrees) {
+            if ((degrees >= 337.5 && degrees <= 360) || (degrees >= 0 && degrees <= 22.5)) {
+                word = t('direction.north');
+            } else if (degrees > 22.5 && degrees < 67.5) {
+                word = t('direction.northeast');
+            } else if (degrees >= 65.5 && degrees <= 112.5) {
+                word = t('direction.east');
+            } else if (degrees > 112.5 && degrees < 157.5) {
+                word = t('direction.southeast');
+            } else if (degrees >= 157.5 && degrees <= 202.5) {
+                word = t('direction.south');
+            } else if (degrees > 202.5 && degrees < 247.5) {
+                word = t('direction.southwest');
+            } else if (degrees >= 247.5 && degrees <= 292.5) {
+                word = t('direction.west');
+            } else if (degrees > 292.5 && degrees < 337.5) {
+                word = t('direction.northwest');
+            }
+            if (word) {
+                word = '(' + word + ')';
+            }
+        }
+        if (degrees) {
+            return <span>{degrees}{'°'} {word}</span>
+        }
+        return <span/>;
     };
     const bodyWindSpeed = (rowData) => {
         return combine(rowData.windSpeed, 'm/s');
     };
-
+    const bodyWindSpeedMax = (rowData) => {
+        return combine(rowData.windSpeedMax, 'm/s');
+    };
     const bodyWindChillCF = (rowData) => {
         if (rowData.windChillC) {
-            return <span>{rowData.windChillC}{'°C'} ({rowData.windChillF}{'F'})</span>
+            const elChillC = <span style={{fontWeight: 'bold'}}>{rowData.windChillC}{'°C'}</span>;
+            if (rowData.windChillF) {
+                return <span style={{whiteSpace: 'nowrap'}}>
+                    {elChillC}
+                    <span> ({rowData.windChillF}{'F'})</span>
+                </span>
+            }
+            return elChillC;
         }
         return <span/>;
     };
-    const bodyWindChillMaxC = (rowData) => {
-        return combine(rowData.windChillMaxC, '°C');
-    };
-    const bodyWindChillMaxF = (rowData) => {
-        return combine(rowData.windChillMaxF, 'F');
+    const bodyWindChillMaxCF = (rowData) => {
+        if (rowData.windChillMaxC) {
+            const elChillCMax = <span style={{fontWeight: 'bold'}}>{rowData.windChillMaxC}{'°C'}</span>;
+            if (rowData.windChillMaxF) {
+                return <span style={{whiteSpace: 'nowrap'}}>
+                    {elChillCMax}
+                    <span> ({rowData.windChillMaxF}{'F'})</span>
+                </span>
+
+            }
+            return elChillCMax;
+        }
+        return <span/>;
     };
 
     let dataTablePrimeReact =
@@ -152,27 +247,26 @@ function Page() {
             headerColumnGroup={headerGroup}
             footerColumnGroup={footerGroup}
             value={stations} resizableColumns={true}
-            scrollable={true} scrollHeight="400px" emptyMessage={"No data found, try again later."}>
+            scrollable={true} scrollHeight="600px" emptyMessage={"No data found, try again later."}>
             <Column key={'name'} field={'name'}/>
-            <Column key={'longitude'} field={'longitude'}/>
-            <Column key={'latitude'} field={'latitude'}/>
+            <Column key={'latitude'} field={'latitude'} body={bodyLatitude}/>
+            <Column key={'longitude'} field={'longitude'} body={bodyLongitude}/>
             <Column key={'phenomenon'} field={'phenomenon'}/>
-            <Column key={'visibility'} field={'visibility'}/>
-            <Column key={'precipitations'} field={'precipitations'}/>
+            <Column key={'visibility'} field={'visibility'} body={bodyVisibility}/>
+            <Column key={'precipitations'} field={'precipitations'} body={bodyPrecipitations}/>
             <Column key={'uvIndex'} field={'uvIndex'}/>
             <Column key={'wmoCode'} field={'wmoCode'}/>
-            <Column key={'airPressure'} field={'airPressure'}/>
-            <Column key={'relativeHumidity'} field={'relativeHumidity'}/>
+            <Column key={'airPressure'} field={'airPressure'} body={bodyAirPressure}/>
+            <Column key={'relativeHumidity'} field={'relativeHumidity'} body={bodyRelativeHumidity}/>
             <Column key={'airTemperature'} field={'airTemperature'} body={bodyAirTemp} style={{fontWeight: "bold"}}/>
-            <Column key={'waterLevel'} field={'waterLevel'}/>
-            <Column key={'waterLevelEh2000'} field={'waterLevelEh2000'}/>
-            <Column key={'waterTemperature'} field={'waterTemperature'}/>
-            <Column key={'windDirection'} field={'windDirection'}/>
+            <Column key={'waterLevel'} field={'waterLevel'} body={bodyWaterLevel}/>
+            <Column key={'waterLevelEh2000'} field={'waterLevelEh2000'} body={bodyWaterLevelEh2000}/>
+            <Column key={'waterTemperature'} field={'waterTemperature'} body={bodyWaterTemp}/>
+            <Column key={'windDirection'} field={'windDirection'} body={bodyWindDirection}/>
             <Column key={'windSpeed'} field={'windSpeed'} body={bodyWindSpeed} style={{fontWeight: "bold"}}/>
-            <Column key={'windSpeedMax'} field={'windSpeedMax'}/>
-            <Column key={'windChillC'} field={'windChillC'} body={bodyWindChillCF} style={{fontWeight: "bold"}}/>
-            <Column key={'windChillMaxC'} field={'windChillMaxC'} body={bodyWindChillMaxC}/>
-            <Column key={'windChillMaxF'} field={'windChillMaxF'} body={bodyWindChillMaxF}/>
+            <Column key={'windSpeedMax'} field={'windSpeedMax'} body={bodyWindSpeedMax}/>
+            <Column key={'windChillC'} field={'windChillC'} body={bodyWindChillCF}/>
+            <Column key={'windChillMaxC'} field={'windChillMaxC'} body={bodyWindChillMaxCF}/>
         </DataTable>;
 
     // let visibility = stats['visibility'];

@@ -9,6 +9,13 @@
     "info": "Info",
     "settings": "Seaded"
   },
+  "header": {
+    "geo": "Geo",
+    "info": "Info",
+    "air": "Õhk",
+    "water": "Vesi",
+    "wind": "Tuul"
+  },
   "station": {
     "max": {
       "name": "Jaama nimi",
@@ -39,29 +46,6 @@
       "longitude": "Pikkuskraad",
       "latitude": "Laiuskraad",
       "phenomenon": "Ilmastikunähtus",
-      "visibility": "Nähtavus (km)",
-      "precipitations": "Sademed (mm)",
-      "airPressure": "Õhurõhk (hPa)",
-      "relativeHumidity": "Õhuniiskus (%)",
-      "airTemperature": "Õhutemperatuur (C)",
-      "windDirection": "Tuule suund (°)",
-      "windSpeed": "Tuule kiirus (m/s)",
-      "windSpeedMax": "Puhangud (m/s)",
-      "waterLevel": "Veetase (cm)",
-      "waterLevelEh2000": "Veetase EH2000 (cm)",
-      "waterTemperature": "Veetemperatuur (°C)",
-      "uvIndex": "UV indeks",
-      "windChillC": "Wind chill (°C)",
-      "windChillMaxC": "Wind chill max (°C)",
-      "windChillF": "Wind chill (F)",
-      "windChillMaxF": "Wind chill max (F)"
-    },
-    "min": {
-      "name": "Nimi",
-      "wmoCode": "WMO",
-      "longitude": "Pikkuskraad",
-      "latitude": "Laiuskraad",
-      "phenomenon": "Ilmastik",
       "visibility": "Nähtavus",
       "precipitations": "Sademed",
       "airPressure": "Õhurõhk",
@@ -75,10 +59,20 @@
       "waterTemperature": "Veetemperatuur",
       "uvIndex": "UV indeks",
       "windChillC": "Tuulekülm",
-      "windChillMaxC": "Tuulekülm max",
+      "windChillMaxC": "Tuulekülm puhangud",
       "windChillF": "Tuulekülm",
-      "windChillMaxF": "Tuulekülm max"
+      "windChillMaxF": "Tuulekülm puhangud"
     }
+  },
+  "direction": {
+    "north": "Põhi",
+    "northeast": "Kirre",
+    "east": "Ida",
+    "southeast": "Kagu",
+    "south": "Lõuna",
+    "southwest": "Edel",
+    "west": "Lääs",
+    "northwest": "Loe"
   },
   "generic": {
     "windChill": "Tuulekülm",
@@ -91,7 +85,6 @@
     "water": "Vesi",
     "wind": "Tuul",
     "weather": "Ilm",
-    
     "unit": "Ühik",
     "min": "Miinimum",
     "max": "Maksimum",
