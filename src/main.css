@@ -68,8 +68,15 @@ body .p-selectbutton .p-button.p-highlight {
 /* weather icons */
 .icon-wrap .icon,
 .icon-wrap .wi {
-    padding-top: 10px;
-    font-size: 30px;
-    margin-right: 10px;
-    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 3px;
+    font-size: 22px;
+    margin-right: 0;
+    margin-left: 0;
+}
+.icon-wrap-text {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 3px;
 }

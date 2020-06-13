@@ -66,7 +66,7 @@ function Page() {
                     //(h.getTimestamp(data));
                     setTimestamp(h.convertTimestampToDate(h.getTimestamp(data)));
                     // .then(data => h.getStatisticsAirPressure(data));
-                    console.log("YAY DATA IS ", data);
+                    //console.log("Data is: ", data);
                 }
             )
             .catch((err) => {
@@ -153,6 +153,14 @@ function Page() {
             return <span>{rowData.longitude}{'°'}</span>
         }
         return <span/>;
+    }
+    const bodyPhenomenon = (rowData) => {
+        return <div>
+            <div className="icon-wrap" style={{float: "left"}}>
+                <i className={"wi " + h.getWeatherIconArrayValue(rowData.phenomenon)}/>
+            </div>
+            <span className={"icon-wrap-text"}>{rowData.phenomenon}</span>
+        </div>
     }
     const bodyVisibility = (rowData) => {
         return combine(rowData.visibility, 'km');
@@ -251,7 +259,7 @@ function Page() {
             <Column key={'name'} field={'name'}/>
             <Column key={'latitude'} field={'latitude'} body={bodyLatitude}/>
             <Column key={'longitude'} field={'longitude'} body={bodyLongitude}/>
-            <Column key={'phenomenon'} field={'phenomenon'}/>
+            <Column key={'phenomenon'} field={'phenomenon'} body={bodyPhenomenon}/>
             <Column key={'visibility'} field={'visibility'} body={bodyVisibility}/>
             <Column key={'precipitations'} field={'precipitations'} body={bodyPrecipitations}/>
             <Column key={'uvIndex'} field={'uvIndex'}/>
