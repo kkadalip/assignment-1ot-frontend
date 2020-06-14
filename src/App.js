@@ -32,8 +32,11 @@ function Page() {
     useEffect(() => {
         const savedLanguage = localStorage.getItem('SelectedLanguage') || 'en';
         changeLanguage(savedLanguage);
-
         getWeatherStations();
+        const interval = setInterval(() => {
+            getWeatherStations();
+        }, 60000);
+        return () => clearInterval(interval);
     }, []);
 
     let [isLoading, setIsLoading] = useState(true);
@@ -42,7 +45,7 @@ function Page() {
     let [timestamp, setTimestamp] = useState('');
 
     const getWeatherStations = () => {
-        const result = axios.get(stationsUrl)
+        axios.get(stationsUrl)
             .then(res => res.data[res.data.length - 1])
             .then(data => {
                     setIsLoading(false);
@@ -147,9 +150,6 @@ function Page() {
     const bodyPhenomenon = (rowData) => {
         const arrayValue = h.getWeatherIconArrayValue(rowData.phenomenon);
         let arrayValueTranslation = t(h.getWeatherIconTranslationValue(rowData.phenomenon));
-        if(arrayValue){
-            console.log("ARRAY VALUE IS " + arrayValue); // t(arrayValue['t'])
-        }
         return <div className='nowrap'>
             <div className="icon-wrap float-left">
                 <i className={"wi " + arrayValue}/>
