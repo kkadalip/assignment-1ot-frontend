@@ -1,32 +1,26 @@
-#  Estonian Weather data
-# assignment-1ot-frontend
+#  Estonian Weather data UI
 Frontend code for 1oT assignment
 
-## Building the application
+## 1. Navigate to project root
+    $ cd C:\Users\username\workspace\assignment-1ot-frontend
 
-$ npm run-script build
+## 2. [OPTION 1] Building and running with docker
+    $ docker build -t weatherapp-ui .
+    $ docker run -p 3000:3000 weatherapp-ui .
 
-## Starting the application
-
-$ npm start
-
-OR
-
-$ npm install -g serve
-
-$ serve -s build
-
-### Environment variables
-
-TODO
+## 2. [OPTION 2] Building and running with docker-compose
+    ($ docker-compose down)
+    $ docker-compose up
+    Open http://localhost:3000/
     
-### Configuration files
+## 2. [OPTION 3] Building and running the application with npm
+    $ npm run-script build
+    $ npm start
+    Open http://localhost:3000/
 
-TODO
-
-
-#### Frameworks in use:
+#### Technologies and frameworks in use:
 * ReactJS https://github.com/facebook/create-react-app
+* Docker https://docs.docker.com/docker-for-windows/ and https://hub.docker.com/_/node
 
 ###### UI:
 * PrimeReact <a>https://www.primefaces.org/primereact
