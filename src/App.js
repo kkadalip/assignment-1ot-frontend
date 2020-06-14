@@ -146,7 +146,8 @@ function Page() {
     const bodyLongitude = (rowData) => {
         if (rowData.latitude && rowData.longitude) {
             return <span><a
-                href={getGoogleMapsUrl(rowData.latitude, rowData.longitude)} target="_blank">{rowData.longitude}{'°'}</a></span>
+                href={getGoogleMapsUrl(rowData.latitude, rowData.longitude)}
+                target="_blank">{rowData.longitude}{'°'}</a></span>
         } else if (rowData.longitude) {
             return <span>{rowData.longitude}{'°'}</span>
         }
@@ -279,59 +280,59 @@ function Page() {
             <Row>
                 <Column footer={t('generic.min')} colSpan={1}/>
                 <Column footer="" colSpan={3}/>
-                <Column footer={h.getMin(visibility)} colSpan={1}/>
-                <Column footer={h.getMin(precipitations)} colSpan={1}/>
+                <Column footer={h.getMinExtra(visibility, 'km')} colSpan={1}/>
+                <Column footer={h.getMinExtra(precipitations, 'mm')} colSpan={1}/>
                 <Column footer={h.getMin(uvIndex)} colSpan={1}/>
                 <Column footer="" colSpan={1}/>
-                <Column footer={h.getMin(airPressure)} colSpan={1}/>
-                <Column footer={h.getMin(humidity)} colSpan={1}/>
-                <Column footer={h.getMin(airTemp)} colSpan={1}/>
-                <Column footer={h.getMin(waterLevel)} colSpan={1}/>
-                <Column footer={h.getMin(waterLevelEH2000)} colSpan={1}/>
-                <Column footer={h.getMin(waterTemp)} colSpan={1}/>
+                <Column footer={h.getMinExtra(airPressure, 'hPa')} colSpan={1}/>
+                <Column footer={h.getMinExtra(humidity, '%')} colSpan={1}/>
+                <Column footer={h.getMinExtra(airTemp, '°C')} colSpan={1}/>
+                <Column footer={h.getMinExtra(waterLevel, 'cm')} colSpan={1}/>
+                <Column footer={h.getMinExtra(waterLevelEH2000, 'cm')} colSpan={1}/>
+                <Column footer={h.getMinExtra(waterTemp, '°C')} colSpan={1}/>
                 <Column footer="" colSpan={1}/>
-                <Column footer={h.getMin(windSpeed)} colSpan={1}/>
-                <Column footer={h.getMin(windSpeedMax)} colSpan={1}/>
-                <Column footer={h.getMin(windChillC)} colSpan={1}/>
-                <Column footer={h.getMin(windChillMaxC)} colSpan={1}/>
+                <Column footer={h.getMinExtra(windSpeed, 'm/s')} colSpan={1}/>
+                <Column footer={h.getMinExtra(windSpeedMax, 'm/s')} colSpan={1}/>
+                <Column footer={h.getMinExtra(windChillC, '°C')} colSpan={1}/>
+                <Column footer={h.getMinExtra(windChillMaxC, '°C')} colSpan={1}/>
             </Row>
             <Row>
                 <Column footer={t('generic.max')} colSpan={1}/>
                 <Column footer="" colSpan={3}/>
-                <Column footer={h.getMax(visibility)} colSpan={1}/>
-                <Column footer={h.getMax(precipitations)} colSpan={1}/>
+                <Column footer={h.getMaxExtra(visibility, 'km')} colSpan={1}/>
+                <Column footer={h.getMaxExtra(precipitations, 'mm')} colSpan={1}/>
                 <Column footer={h.getMax(uvIndex)} colSpan={1}/>
                 <Column footer="" colSpan={1}/>
-                <Column footer={h.getMax(airPressure)} colSpan={1}/>
-                <Column footer={h.getMax(humidity)} colSpan={1}/>
-                <Column footer={h.getMax(airTemp)} colSpan={1}/>
-                <Column footer={h.getMax(waterLevel)} colSpan={1}/>
-                <Column footer={h.getMax(waterLevelEH2000)} colSpan={1}/>
-                <Column footer={h.getMax(waterTemp)} colSpan={1}/>
+                <Column footer={h.getMaxExtra(airPressure, 'hPa')} colSpan={1}/>
+                <Column footer={h.getMaxExtra(humidity, '%')} colSpan={1}/>
+                <Column footer={h.getMaxExtra(airTemp, '°C')} colSpan={1}/>
+                <Column footer={h.getMaxExtra(waterLevel, 'cm')} colSpan={1}/>
+                <Column footer={h.getMaxExtra(waterLevelEH2000, 'cm')} colSpan={1}/>
+                <Column footer={h.getMaxExtra(waterTemp, '°C')} colSpan={1}/>
                 <Column footer="" colSpan={1}/>
-                <Column footer={h.getMax(windSpeed)} colSpan={1}/>
-                <Column footer={h.getMax(windSpeedMax)} colSpan={1}/>
-                <Column footer={h.getMax(windChillC)} colSpan={1}/>
-                <Column footer={h.getMax(windChillMaxC)} colSpan={1}/>
+                <Column footer={h.getMaxExtra(windSpeed, 'm/s')} colSpan={1}/>
+                <Column footer={h.getMaxExtra(windSpeedMax, 'm/s')} colSpan={1}/>
+                <Column footer={h.getMaxExtra(windChillC, '°C')} colSpan={1}/>
+                <Column footer={h.getMaxExtra(windChillMaxC, '°C')} colSpan={1}/>
             </Row>
             <Row>
                 <Column footer={t('generic.average')} colSpan={1}/>
                 <Column footer="" colSpan={3}/>
-                <Column footer={h.getAvg(visibility)} colSpan={1}/>
-                <Column footer={h.getAvg(precipitations)} colSpan={1}/>
+                <Column footer={h.getAvgExtra(visibility, 'km')} colSpan={1}/>
+                <Column footer={h.getAvgExtra(precipitations, 'mm')} colSpan={1}/>
                 <Column footer={h.getAvg(uvIndex)} colSpan={1}/>
                 <Column footer="" colSpan={1}/>
-                <Column footer={h.getAvg(airPressure)} colSpan={1}/>
-                <Column footer={h.getAvg(humidity)} colSpan={1}/>
-                <Column footer={h.getAvg(airTemp)} colSpan={1}/>
-                <Column footer={h.getAvg(waterLevel)} colSpan={1}/>
-                <Column footer={h.getAvg(waterLevelEH2000)} colSpan={1}/>
-                <Column footer={h.getAvg(waterTemp)} colSpan={1}/>
+                <Column footer={h.getAvgExtra(airPressure, 'hPa')} colSpan={1}/>
+                <Column footer={h.getAvgExtra(humidity, '%')} colSpan={1}/>
+                <Column footer={h.getAvgExtra(airTemp, '°C')} colSpan={1}/>
+                <Column footer={h.getAvgExtra(waterLevel, 'cm')} colSpan={1}/>
+                <Column footer={h.getAvgExtra(waterLevelEH2000, 'cm')} colSpan={1}/>
+                <Column footer={h.getAvgExtra(waterTemp, '°C')} colSpan={1}/>
                 <Column footer="" colSpan={1}/>
-                <Column footer={h.getAvg(windSpeed)} colSpan={1}/>
-                <Column footer={h.getAvg(windSpeedMax)} colSpan={1}/>
-                <Column footer={h.getAvg(windChillC)} colSpan={1}/>
-                <Column footer={h.getAvg(windChillMaxC)} colSpan={1}/>
+                <Column footer={h.getAvgExtra(windSpeed, 'm/s')} colSpan={1}/>
+                <Column footer={h.getAvgExtra(windSpeedMax, 'm/s')} colSpan={1}/>
+                <Column footer={h.getAvgExtra(windChillC, '°C')} colSpan={1}/>
+                <Column footer={h.getAvgExtra(windChillMaxC, '°C')} colSpan={1}/>
             </Row>
             <Row>
                 <Column footer={t('generic.count')} colSpan={1}/>

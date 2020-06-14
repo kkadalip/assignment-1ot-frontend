@@ -129,9 +129,21 @@ export function getMin(obj) {
     }
 }
 
+export function getMinExtra(obj, extraText) {
+    if (obj !== undefined) {
+        return obj.min + extraText;
+    }
+}
+
 export function getMax(obj) {
     if (obj !== undefined) {
         return obj.max;
+    }
+}
+
+export function getMaxExtra(obj, extraText) {
+    if (obj !== undefined) {
+        return obj.max + extraText;
     }
 }
 
@@ -140,6 +152,13 @@ export function getAvg(obj) {
         return obj.average;
     }
 }
+
+export function getAvgExtra(obj, extraText) {
+    if (obj !== undefined) {
+        return obj.average + extraText;
+    }
+}
+
 
 export function getCount(obj) {
     if (obj !== undefined) {
