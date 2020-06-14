@@ -85,14 +85,27 @@ body .p-selectbutton .p-button.p-highlight {
     padding-left: 3px;
 }
 
-.no-wrap {
+.nowrap {
     white-space: nowrap;
+}
+
+.prewrap {
+    white-space: pre;
 }
 
 .bold {
     font-weight: bold;
 }
 
+.float-left {
+    float: left;
+}
+
 .select-language-button {
     float: right;
+}
+
+.p-datatable .p-sortable-column-icon {
+    font-size: 1em;
+    display: none;
 }

@@ -101,7 +101,7 @@ function Page() {
 
     function combineBold(value, unit, valueWidth) {
         if (value) {
-            return <span style={{whiteSpace: 'pre'}}><span
+            return <span className='prewrap'><span
                 className='bold'>{String(value).padStart(valueWidth, ' ')}</span>{unit}</span>
         }
         return <span/>;
@@ -109,7 +109,7 @@ function Page() {
 
     function combine(value, unit, valueWidth) {
         if (value) {
-            return <span style={{whiteSpace: 'pre'}}>{String(value).padStart(valueWidth, ' ')}{unit}</span>
+            return <span className='prewrap'>{String(value).padStart(valueWidth, ' ')}{unit}</span>
         }
         return <span/>;
     }
@@ -145,11 +145,16 @@ function Page() {
         return <span/>;
     }
     const bodyPhenomenon = (rowData) => {
-        return <div style={{whiteSpace: 'nowrap'}}>
-            <div className="icon-wrap" style={{float: "left"}}>
-                <i className={"wi " + h.getWeatherIconArrayValue(rowData.phenomenon)}/>
+        const arrayValue = h.getWeatherIconArrayValue(rowData.phenomenon);
+        let arrayValueTranslation = t(h.getWeatherIconTranslationValue(rowData.phenomenon));
+        if(arrayValue){
+            console.log("ARRAY VALUE IS " + arrayValue); // t(arrayValue['t'])
+        }
+        return <div className='nowrap'>
+            <div className="icon-wrap float-left">
+                <i className={"wi " + arrayValue}/>
             </div>
-            <div className={"icon-wrap-text"}>{rowData.phenomenon}</div>
+            <div className={"icon-wrap-text"}>{arrayValueTranslation}</div>
         </div>
     }
     const bodyVisibility = (rowData) => {
