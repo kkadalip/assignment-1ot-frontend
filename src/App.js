@@ -1,4 +1,4 @@
-import React, {Suspense, useEffect, useState} from 'react'; // Component // useState
+import React, {Suspense, useEffect, useState} from 'react';
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -6,13 +6,9 @@ import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {ColumnGroup} from 'primereact/columngroup';
 import {Row} from 'primereact/row';
-// import {DataService} from './service/DataService';
 import {ProgressSpinner} from 'primereact/progressspinner';
 import {SelectButton} from 'primereact/selectbutton';
-// import {TabMenu} from 'primereact/tabmenu';
 import {useTranslation} from 'react-i18next';
-// import i18n from './translations/i18n';
-import {Table} from 'reactstrap';
 import 'react-icons-weather/lib/css/weather-icons.css';
 import * as h from "./service/IndexHelper";
 import logo from './logo.svg';
@@ -23,7 +19,6 @@ function Page() {
     const {t, i18n} = useTranslation();
     const changeLanguage = lng => {
         i18n.changeLanguage(lng);
-        //this.setState({tabs: h.getTabs()});
         localStorage.setItem('SelectedLanguage', lng);
     };
 
@@ -42,9 +37,8 @@ function Page() {
     }, []);
 
     let [isLoading, setIsLoading] = useState(true);
-    let [stations, setStations] = useState([]); // NOT NEEDED?
+    let [stations, setStations] = useState([]);
     let [stats, setStatistics] = useState([]);
-    let [statsVisibility, setStatisticsVisibility] = useState([]);
     let [timestamp, setTimestamp] = useState('');
 
     const getWeatherStations = () => {
@@ -54,11 +48,8 @@ function Page() {
                     setIsLoading(false);
                     setStations(h.getStations(data));
                     setStatistics(h.getStatistics(data));
-                    setStatisticsVisibility(h.getStatisticsVisibility(data));
-                    //(h.getTimestamp(data));
                     setTimestamp(h.convertTimestampToDate(h.getTimestamp(data)));
-                    // .then(data => h.getStatisticsAirPressure(data));
-                    //console.log("Data is: ", data);
+                    // console.log("Data is: ", data);
                 }
             )
             .catch((err) => {
@@ -154,11 +145,11 @@ function Page() {
         return <span/>;
     }
     const bodyPhenomenon = (rowData) => {
-        return <div>
+        return <div style={{whiteSpace: 'nowrap'}}>
             <div className="icon-wrap" style={{float: "left"}}>
                 <i className={"wi " + h.getWeatherIconArrayValue(rowData.phenomenon)}/>
             </div>
-            <span className={"icon-wrap-text"}>{rowData.phenomenon}</span>
+            <div className={"icon-wrap-text"}>{rowData.phenomenon}</div>
         </div>
     }
     const bodyVisibility = (rowData) => {
@@ -242,19 +233,16 @@ function Page() {
     let visibility = stats['visibility'];
     let uvIndex = stats['uvIndex'];
     let airPressure = stats['airPressure'];
-    let precipitations = stats['precipitations']; //???
+    let precipitations = stats['precipitations'];
     let humidity = stats['humidity'];
     let airTemp = stats['airTemperature'];
-    // let windDir = stats['windDirection'];
     let windSpeed = stats['windSpeed'];
     let windSpeedMax = stats['windSpeedMax'];
     let waterLevel = stats['waterLevel'];
     let waterLevelEH2000 = stats['waterLevelEH2000'];
     let waterTemp = stats['waterTemperature'];
     let windChillC = stats['windChillC'];
-    // let windChillF = stats['windChillF'];
     let windChillMaxC = stats['windChillMaxC'];
-    // let windChillMaxF = stats['windChillMaxF'];
 
     let footerGroup =
         <ColumnGroup>

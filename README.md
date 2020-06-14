@@ -4,13 +4,14 @@ Frontend code for 1oT assignment
 ## 1. Navigate to project root
     $ cd C:\Users\username\workspace\assignment-1ot-frontend
 
-## 2. [OPTION 1] Building and running with docker
+## 2. [OPTION 1] Building and running with docker-compose
+    ($ docker-compose down)
+    ($ docker-compose build --no-cache)
+    $ docker-compose up
+    
+## 2. [OPTION 2] Building and running with docker
     $ docker build -t weatherapp-ui .
     $ docker run -p 3000:3000 weatherapp-ui .
-
-## 2. [OPTION 2] Building and running with docker-compose
-    ($ docker-compose down)
-    $ docker-compose up
     
 ## 2. [OPTION 3] Building and running the application with npm
     $ npm run-script build

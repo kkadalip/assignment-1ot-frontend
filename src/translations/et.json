@@ -81,7 +81,7 @@
     "min": "Minimaalne",
     "max": "Maksimaalne",
     "average": "Keskmine",
-    "count": "Arv",
+    "count": "Hulk",
     "emptyMessage": "Andmeid ei leitud, proovi hiljem uuesti.",
     "statistics": "Statistika",
     "search": "Otsi"
