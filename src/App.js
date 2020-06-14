@@ -118,7 +118,7 @@ function Page() {
     let footerGroup =
         <ColumnGroup>
             <Row>
-                <Column footer="Averages:" colSpan={1}/>
+                <Column footer={t('generic.averages')} colSpan={1}/>
                 <Column footer="" colSpan={2}/>
                 <Column footer="" colSpan={2}/>
                 <Column footer="" colSpan={16}/>
@@ -134,6 +134,13 @@ function Page() {
 
     function getGoogleMapsUrl(latitude, longitude) {
         return 'http://www.google.com/maps/place/' + latitude + ',' + longitude;
+    }
+
+    const bodyName = (rowData) => {
+        if (rowData.name) {
+            return <div style={{textAlign: 'left', width: '100%'}}>{rowData.name}</div>
+        }
+        return <div/>;
     }
 
     const bodyLatitude = (rowData) => {
@@ -187,7 +194,7 @@ function Page() {
         return combine(rowData.airTemperature, '°C');
     };
     const bodyWindDirection = (rowData) => {
-        const degrees = rowData.windDirection;
+        let degrees = rowData.windDirection;
         let word = '';
         if (degrees) {
             if ((degrees >= 337.5 && degrees <= 360) || (degrees >= 0 && degrees <= 22.5)) {
@@ -207,14 +214,15 @@ function Page() {
             } else if (degrees > 292.5 && degrees < 337.5) {
                 word = t('direction.northwest');
             }
-            if (word) {
-                word = '(' + word + ')';
-            }
         }
         if (degrees) {
-            return <span>{degrees}{'°'} {word}</span>
+            degrees = String("   " + degrees).slice(-3);
+            return <div style={{whiteSpace: 'pre', textAlign: 'left'}}>
+                <div style={{width: '30px', display: 'inline-block', textAlign: 'right'}}>{degrees}{'°'}</div>
+                <div style={{display: 'inline-block', textAlign: 'left', paddingLeft: '5px'}}> {word}</div>
+            </div>
         }
-        return <span/>;
+        return <div/>;
     };
     const bodyWindSpeed = (rowData) => {
         return combine(rowData.windSpeed, 'm/s');
@@ -255,8 +263,8 @@ function Page() {
             headerColumnGroup={headerGroup}
             footerColumnGroup={footerGroup}
             value={stations} resizableColumns={true}
-            scrollable={true} scrollHeight="600px" emptyMessage={"No data found, try again later."}>
-            <Column key={'name'} field={'name'}/>
+            scrollable={true} scrollHeight="800px" emptyMessage={t('generic.emptyMessage')}>
+            <Column key={'name'} field={'name'} body={bodyName}/>
             <Column key={'latitude'} field={'latitude'} body={bodyLatitude}/>
             <Column key={'longitude'} field={'longitude'} body={bodyLongitude}/>
             <Column key={'phenomenon'} field={'phenomenon'} body={bodyPhenomenon}/>

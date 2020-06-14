@@ -100,7 +100,7 @@
   "generic": {
     "windChill": "Wind chill",
     "dataset": "Dataset",
-    "averages": "Statistic averages",
+    "averages": "Averages",
     "pressure": "Pressure",
     "humidity": "Humidity",
     "temp": "Temp",
@@ -112,6 +112,7 @@
     "min": "Min",
     "max": "Max",
     "average": "Average",
-    "count": "Count"
+    "count": "Count",
+    "emptyMessage": "No data found, try again later."
   }
 }

@@ -14,6 +14,10 @@ body {
     text-align: center;
 }
 
+body .pi {
+    font-size: 1em;
+}
+
 body .p-selectbutton .p-button.p-highlight {
     background-color: red;
 }
