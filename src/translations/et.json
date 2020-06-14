@@ -42,22 +42,22 @@
     },
     "full": {
       "name": "Jaama nimi",
-      "wmoCode": "WMO kood",
+      "wmoCode": "WMO",
       "longitude": "Pikkuskraad",
       "latitude": "Laiuskraad",
       "phenomenon": "Ilmastikunähtus",
       "visibility": "Nähtavus",
       "precipitations": "Sademed",
-      "airPressure": "Õhurõhk",
-      "relativeHumidity": "Õhuniiskus",
-      "airTemperature": "Õhutemperatuur",
-      "windDirection": "Tuule suund",
-      "windSpeed": "Tuule kiirus",
+      "airPressure": "Rõhk",
+      "relativeHumidity": "Niiskus",
+      "airTemperature": "Temperatuur",
+      "windDirection": "Suund",
+      "windSpeed": "Kiirus",
       "windSpeedMax": "Puhangud",
       "waterLevel": "Veetase",
       "waterLevelEh2000": "Veetase EH2000",
       "waterTemperature": "Veetemperatuur",
-      "uvIndex": "UV indeks",
+      "uvIndex": "UV",
       "windChillC": "Tuulekülm",
       "windChillMaxC": "Tuulekülm puhangud",
       "windChillF": "Tuulekülm",
@@ -90,6 +90,7 @@
     "max": "Maksimum",
     "average": "Keskmine",
     "count": "Arv",
-    "emptyMessage": "Andmeid ei leitud, proovi hiljem uuesti."
+    "emptyMessage": "Andmeid ei leitud, proovi hiljem uuesti.",
+    "statistics": "Statistika"
   }
 }

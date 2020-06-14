@@ -85,7 +85,8 @@ function Page() {
                 <Column header={t('header.wind')} colSpan={5}/>
             </Row>
             <Row>
-                <Column key={'name'} field={'name'} header={t('station.full.name')} sortable="true"/>
+                <Column key={'name'} field={'name'} header={t('station.full.name')} sortable="true"
+                        sortable filter filterPlaceholder="Search by name"/>
                 <Column key={'latitude'} field={'latitude'} header={t('station.full.latitude')} sortable="true"/>
                 <Column key={'longitude'} field={'longitude'} header={t('station.full.longitude')} sortable="true"/>
                 <Column key={'phenomenon'} field={'phenomenon'} header={t('station.full.phenomenon')} sortable="true"/>
@@ -125,9 +126,9 @@ function Page() {
             </Row>
         </ColumnGroup>;
 
-    function combine(value, unit) {
+    function combine(value, unit, valueWidth) {
         if (value) {
-            return <span>{value}{unit}</span>
+            return <span style={{whiteSpace: 'pre'}}>{String(value).padStart(valueWidth, ' ')}{unit}</span>
         }
         return <span/>;
     }
@@ -170,28 +171,28 @@ function Page() {
         </div>
     }
     const bodyVisibility = (rowData) => {
-        return combine(rowData.visibility, 'km');
+        return combine(rowData.visibility, 'km', 3);
     }
     const bodyPrecipitations = (rowData) => {
-        return combine(rowData.precipitations, 'mm');
+        return combine(rowData.precipitations, 'mm', 3);
     }
     const bodyAirPressure = (rowData) => {
-        return combine(rowData.airPressure, 'hPa');
+        return combine(rowData.airPressure, 'hPa', 6);
     }
     const bodyRelativeHumidity = (rowData) => {
-        return combine(rowData.relativeHumidity, '%');
+        return combine(rowData.relativeHumidity, '%', 3);
     }
     const bodyWaterLevel = (rowData) => {
-        return combine(rowData.waterLevel, 'cm');
+        return combine(rowData.waterLevel, 'cm', 3);
     }
     const bodyWaterLevelEh2000 = (rowData) => {
-        return combine(rowData.waterLevelEh2000, 'cm');
+        return combine(rowData.waterLevelEh2000, 'cm', 3);
     }
     const bodyWaterTemp = (rowData) => {
-        return combine(rowData.waterTemperature, '°C');
+        return combine(rowData.waterTemperature, '°C', 4);
     }
     const bodyAirTemp = (rowData) => {
-        return combine(rowData.airTemperature, '°C');
+        return combine(rowData.airTemperature, '°C', 4);
     };
     const bodyWindDirection = (rowData) => {
         let degrees = rowData.windDirection;
@@ -216,9 +217,12 @@ function Page() {
             }
         }
         if (degrees) {
-            degrees = String("   " + degrees).slice(-3);
             return <div style={{whiteSpace: 'pre', textAlign: 'left'}}>
-                <div style={{width: '30px', display: 'inline-block', textAlign: 'right'}}>{degrees}{'°'}</div>
+                <div style={{
+                    width: '30px',
+                    display: 'inline-block',
+                    textAlign: 'right'
+                }}>{String(degrees).padStart(3, ' ')}{'°'}</div>
                 <div style={{display: 'inline-block', textAlign: 'left', paddingLeft: '5px'}}> {word}</div>
             </div>
         }
@@ -263,7 +267,7 @@ function Page() {
             headerColumnGroup={headerGroup}
             footerColumnGroup={footerGroup}
             value={stations} resizableColumns={true}
-            scrollable={true} scrollHeight="800px" emptyMessage={t('generic.emptyMessage')}>
+            scrollable={true} scrollHeight="600px" emptyMessage={t('generic.emptyMessage')}>
             <Column key={'name'} field={'name'} body={bodyName}/>
             <Column key={'latitude'} field={'latitude'} body={bodyLatitude}/>
             <Column key={'longitude'} field={'longitude'} body={bodyLongitude}/>
@@ -423,7 +427,7 @@ function Page() {
                         <h2>{t('generic.dataset')} <b>{timestamp}</b>:</h2>
                         {dataTablePrimeReact}
                         <br/>
-                        <h2>{t('generic.averages')}:</h2>
+                        <h2>{t('generic.statistics')}:</h2>
                         {dataTableAveragesReactStrap}
                         <br/>
                     </div>
@@ -439,7 +443,7 @@ const Loader = () => (
         <div>loading...</div>
     </div>
 );
-// export default App;
+
 export default function App() {
     return (
         <Suspense fallback={<Loader/>}>

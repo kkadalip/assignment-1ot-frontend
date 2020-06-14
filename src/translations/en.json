@@ -42,14 +42,14 @@
     },
     "full": {
       "name": "Station name",
-      "wmoCode": "WMO code",
+      "wmoCode": "WMO",
       "longitude": "Longitude",
       "latitude": "Latitude",
       "phenomenon": "Phenomenon",
       "visibility": "Visibility",
       "precipitations": "Precipitations",
       "airPressure": "Pressure",
-      "relativeHumidity": "Relative humidity",
+      "relativeHumidity": "Humidity",
       "airTemperature": "Temperature",
       "windDirection": "Direction",
       "windSpeed": "Speed",
@@ -57,7 +57,7 @@
       "waterLevel": "Level",
       "waterLevelEh2000": "Level EH2000",
       "waterTemperature": "Temperature",
-      "uvIndex": "UV index",
+      "uvIndex": "UV",
       "windChillC": "Chill",
       "windChillMaxC": "Chill gusts",
       "windChillF": "Chill",
@@ -113,6 +113,7 @@
     "max": "Max",
     "average": "Average",
     "count": "Count",
-    "emptyMessage": "No data found, try again later."
+    "emptyMessage": "No data found, try again later.",
+    "statistics": "Statistics"
   }
 }
