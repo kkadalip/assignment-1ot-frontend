@@ -84,3 +84,15 @@ body .p-selectbutton .p-button.p-highlight {
     vertical-align: middle;
     padding-left: 3px;
 }
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.select-language-button {
+    float: right;
+}
