@@ -19,25 +19,14 @@ import logo from './logo.svg';
 import './main.css';
 import axios from "axios/index";
 
-/*
-DataService.getData().then(data => this.setState({
-            loading: false,
-            stations: h.getStations(data),
-            statistics: h.getStatistics(data),
-            visibility: h.getStatisticsVisibility(data),
-            timestamp: h.getTimestamp(data)
-        })).then(data => h.getStatisticsAirPressure(data));
- */
-
-// const App = () => {
 function Page() {
-    //const {t, i18n} = this.props;
     const {t, i18n} = useTranslation();
     const changeLanguage = lng => {
         i18n.changeLanguage(lng);
         //this.setState({tabs: h.getTabs()});
-        //localStorage.setItem('SelectedLanguage', lng);
+        localStorage.setItem('SelectedLanguage', lng);
     };
+
     const langSelectItems = [
         {label: 'English', value: 'en'},
         {label: 'Eesti', value: 'et'}
@@ -46,6 +35,9 @@ function Page() {
     const stationsUrl = 'http://localhost:8090/stations'
 
     useEffect(() => {
+        const savedLanguage = localStorage.getItem('SelectedLanguage') || 'en';
+        changeLanguage(savedLanguage);
+
         getWeatherStations();
     }, []);
 
