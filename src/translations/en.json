@@ -2,13 +2,6 @@
   "title": {
     "main": "Estonian weather stations"
   },
-  "tabs": {
-    "home": "Home",
-    "maps": "Google maps",
-    "statistics": "Statistics",
-    "info": "Info",
-    "settings": "Settings"
-  },
   "header": {
     "geo": "Geo",
     "info": "Info",
@@ -103,7 +96,6 @@
     "averages": "Averages",
     "pressure": "Pressure",
     "humidity": "Humidity",
-    "temp": "Temp",
     "air": "Air",
     "water": "Water",
     "wind": "Wind",
@@ -114,6 +106,7 @@
     "average": "Average",
     "count": "Count",
     "emptyMessage": "No data found, try again later.",
-    "statistics": "Statistics"
+    "statistics": "Statistics",
+    "search": "Search"
   }
 }

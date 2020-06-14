@@ -78,7 +78,7 @@ function Page() {
             </Row>
             <Row>
                 <Column key={'name'} field={'name'} header={t('station.full.name')} sortable filter
-                        filterPlaceholder="Search by name"/>
+                        filterPlaceholder={t('generic.search')}/>
                 <Column key={'latitude'} field={'latitude'} header={t('station.full.latitude')} sortable/>
                 <Column key={'longitude'} field={'longitude'} header={t('station.full.longitude')} sortable/>
                 <Column key={'phenomenon'} field={'phenomenon'} header={t('station.full.phenomenon')} sortable/>
@@ -137,7 +137,7 @@ function Page() {
     const bodyLatitude = (rowData) => {
         if (rowData.latitude && rowData.longitude) {
             return <span><a
-                href={getGoogleMapsUrl(rowData.latitude, rowData.longitude)}>{rowData.latitude}{'°'}</a></span>
+                href={getGoogleMapsUrl(rowData.latitude, rowData.longitude)} target="_blank">{rowData.latitude}{'°'}</a></span>
         } else if (rowData.latitude) {
             return <span>{rowData.latitude}{'°'}</span>
         }
@@ -146,7 +146,7 @@ function Page() {
     const bodyLongitude = (rowData) => {
         if (rowData.latitude && rowData.longitude) {
             return <span><a
-                href={getGoogleMapsUrl(rowData.latitude, rowData.longitude)}>{rowData.longitude}{'°'}</a></span>
+                href={getGoogleMapsUrl(rowData.latitude, rowData.longitude)} target="_blank">{rowData.longitude}{'°'}</a></span>
         } else if (rowData.longitude) {
             return <span>{rowData.longitude}{'°'}</span>
         }
@@ -169,6 +169,7 @@ function Page() {
     const bodyAirPressure = (rowData) => {
         return combine(rowData.airPressure, 'hPa', 6);
     }
+
     const bodyRelativeHumidity = (rowData) => {
         return combine(rowData.relativeHumidity, '%', 3);
     }

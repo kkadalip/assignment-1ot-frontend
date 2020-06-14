@@ -2,13 +2,6 @@
   "title": {
     "main": "Eesti ilmajaamad"
   },
-  "tabs": {
-    "home": "Avaleht",
-    "maps": "Google kaart",
-    "statistics": "Statistika",
-    "info": "Info",
-    "settings": "Seaded"
-  },
   "header": {
     "geo": "Geo",
     "info": "Info",
@@ -48,9 +41,9 @@
       "phenomenon": "Ilmastikunähtus",
       "visibility": "Nähtavus",
       "precipitations": "Sademed",
-      "airPressure": "Rõhk",
-      "relativeHumidity": "Niiskus",
-      "airTemperature": "Temperatuur",
+      "airPressure": "Õhurõhk",
+      "relativeHumidity": "Õhuniiskus",
+      "airTemperature": "Õhutemperatuur",
       "windDirection": "Suund",
       "windSpeed": "Kiirus",
       "windSpeedMax": "Puhangud",
@@ -78,9 +71,8 @@
     "windChill": "Tuulekülm",
     "dataset": "Andmekogu",
     "averages": "Keskmised",
-    "pressure": "Rõhk",
+    "pressure": "Õhurõhk",
     "humidity": "Niiskus",
-    "temp": "Temp",
     "air": "Õhk",
     "water": "Vesi",
     "wind": "Tuul",
@@ -91,6 +83,7 @@
     "average": "Keskmine",
     "count": "Arv",
     "emptyMessage": "Andmeid ei leitud, proovi hiljem uuesti.",
-    "statistics": "Statistika"
+    "statistics": "Statistika",
+    "search": "Otsi"
   }
 }
