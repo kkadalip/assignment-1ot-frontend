@@ -11,12 +11,12 @@ Frontend code for 1oT assignment
 ## 2. [OPTION 2] Building and running with docker-compose
     ($ docker-compose down)
     $ docker-compose up
-    Open http://localhost:3000/
     
 ## 2. [OPTION 3] Building and running the application with npm
     $ npm run-script build
     $ npm start
-    Open http://localhost:3000/
+    
+## 3. Open http://localhost:3000/
 
 #### Technologies and frameworks in use:
 * ReactJS https://github.com/facebook/create-react-app
