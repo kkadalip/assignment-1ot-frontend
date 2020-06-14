@@ -85,46 +85,44 @@ function Page() {
                 <Column header={t('header.wind')} colSpan={5}/>
             </Row>
             <Row>
-                <Column key={'name'} field={'name'} header={t('station.full.name')} sortable="true"
-                        sortable filter filterPlaceholder="Search by name"/>
-                <Column key={'latitude'} field={'latitude'} header={t('station.full.latitude')} sortable="true"/>
-                <Column key={'longitude'} field={'longitude'} header={t('station.full.longitude')} sortable="true"/>
-                <Column key={'phenomenon'} field={'phenomenon'} header={t('station.full.phenomenon')} sortable="true"/>
-                <Column key={'visibility'} field={'visibility'} header={t('station.full.visibility')} sortable="true"/>
+                <Column key={'name'} field={'name'} header={t('station.full.name')} sortable filter
+                        filterPlaceholder="Search by name"/>
+                <Column key={'latitude'} field={'latitude'} header={t('station.full.latitude')} sortable/>
+                <Column key={'longitude'} field={'longitude'} header={t('station.full.longitude')} sortable/>
+                <Column key={'phenomenon'} field={'phenomenon'} header={t('station.full.phenomenon')} sortable/>
+                <Column key={'visibility'} field={'visibility'} header={t('station.full.visibility')} sortable/>
                 <Column key={'precipitations'} field={'precipitations'} header={t('station.full.precipitations')}
-                        sortable="true"/>
-                <Column key={'uvIndex'} field={'uvIndex'} header={t('station.full.uvIndex')} sortable="true"/>
-                <Column key={'wmoCode'} field={'wmoCode'} header={t('station.full.wmoCode')} sortable="true"/>
+                        sortable/>
+                <Column key={'uvIndex'} field={'uvIndex'} header={t('station.full.uvIndex')} sortable/>
+                <Column key={'wmoCode'} field={'wmoCode'} header={t('station.full.wmoCode')} sortable/>
                 <Column key={'airPressure'} field={'airPressure'} header={t('station.full.airPressure')}
-                        sortable="true"/>
+                        sortable/>
                 <Column key={'relativeHumidity'} field={'relativeHumidity'} header={t('station.full.relativeHumidity')}
-                        sortable="true"/>
-                <Column field={'airTemperature'} header={t('station.full.airTemperature')} sortable="true"/>
-                <Column key={'waterLevel'} field={'waterLevel'} header={t('station.full.waterLevel')} sortable="true"/>
+                        sortable/>
+                <Column field={'airTemperature'} header={t('station.full.airTemperature')} sortable/>
+                <Column key={'waterLevel'} field={'waterLevel'} header={t('station.full.waterLevel')} sortable/>
                 <Column key={'waterLevelEh2000'} field={'waterLevelEh2000'} header={t('station.full.waterLevelEh2000')}
-                        sortable="true"/>
+                        sortable/>
                 <Column key={'waterTemperature'} field={'waterTemperature'} header={t('station.full.waterTemperature')}
-                        sortable="true"/>
+                        sortable/>
                 <Column key={'windDirection'} field={'windDirection'} header={t('station.full.windDirection')}
-                        sortable="true"/>
-                <Column key={'windSpeed'} field={'windSpeed'} header={t('station.full.windSpeed')} sortable="true"/>
+                        sortable/>
+                <Column key={'windSpeed'} field={'windSpeed'} header={t('station.full.windSpeed')} sortable/>
                 <Column key={'windSpeedMax'} field={'windSpeedMax'} header={t('station.full.windSpeedMax')}
-                        sortable="true"/>
-                <Column key={'windChillC'} field={'windChillC'} header={t('station.full.windChillC')} sortable="true"/>
+                        sortable/>
+                <Column key={'windChillC'} field={'windChillC'} header={t('station.full.windChillC')} sortable/>
                 <Column key={'windChillMaxC'} field={'windChillMaxC'} header={t('station.full.windChillMaxC')}
-                        sortable="true"/>
+                        sortable/>
             </Row>
         </ColumnGroup>;
 
-    let footerGroup =
-        <ColumnGroup>
-            <Row>
-                <Column footer={t('generic.averages')} colSpan={1}/>
-                <Column footer="" colSpan={2}/>
-                <Column footer="" colSpan={2}/>
-                <Column footer="" colSpan={16}/>
-            </Row>
-        </ColumnGroup>;
+    function combineBold(value, unit, valueWidth) {
+        if (value) {
+            return <span style={{whiteSpace: 'pre'}}><span
+                className='bold'>{String(value).padStart(valueWidth, ' ')}</span>{unit}</span>
+        }
+        return <span/>;
+    }
 
     function combine(value, unit, valueWidth) {
         if (value) {
@@ -192,7 +190,7 @@ function Page() {
         return combine(rowData.waterTemperature, '°C', 4);
     }
     const bodyAirTemp = (rowData) => {
-        return combine(rowData.airTemperature, '°C', 4);
+        return combineBold(rowData.airTemperature, '°C', 4);
     };
     const bodyWindDirection = (rowData) => {
         let degrees = rowData.windDirection;
@@ -229,38 +227,139 @@ function Page() {
         return <div/>;
     };
     const bodyWindSpeed = (rowData) => {
-        return combine(rowData.windSpeed, 'm/s');
+        return combineBold(rowData.windSpeed, 'm/s', 4);
     };
     const bodyWindSpeedMax = (rowData) => {
-        return combine(rowData.windSpeedMax, 'm/s');
+        return combine(rowData.windSpeedMax, 'm/s', 4);
     };
     const bodyWindChillCF = (rowData) => {
         if (rowData.windChillC) {
-            const elChillC = <span className='bold'>{rowData.windChillC}{'°C'}</span>;
-            if (rowData.windChillF) {
-                return <span className='no-wrap'>
-                    {elChillC}
-                    <span> ({rowData.windChillF}{'F'})</span>
-                </span>
-            }
-            return elChillC;
+            return <span>{rowData.windChillC}{'°C'}</span>;
         }
         return <span/>;
     };
     const bodyWindChillMaxCF = (rowData) => {
         if (rowData.windChillMaxC) {
-            const elChillCMax = <span className='bold'>{rowData.windChillMaxC}{'°C'}</span>;
-            if (rowData.windChillMaxF) {
-                return <span className='no-wrap'>
-                    {elChillCMax}
-                    <span> ({rowData.windChillMaxF}{'F'})</span>
-                </span>
-
-            }
-            return elChillCMax;
+            return <span>{rowData.windChillMaxC}{'°C'}</span>;
         }
         return <span/>;
     };
+
+    let visibility = stats['visibility'];
+    let uvIndex = stats['uvIndex'];
+    let airPressure = stats['airPressure'];
+    let precipitations = stats['precipitations']; //???
+    let humidity = stats['humidity'];
+    let airTemp = stats['airTemperature'];
+    // let windDir = stats['windDirection'];
+    let windSpeed = stats['windSpeed'];
+    let windSpeedMax = stats['windSpeedMax'];
+    let waterLevel = stats['waterLevel'];
+    let waterLevelEH2000 = stats['waterLevelEH2000'];
+    let waterTemp = stats['waterTemperature'];
+    let windChillC = stats['windChillC'];
+    // let windChillF = stats['windChillF'];
+    let windChillMaxC = stats['windChillMaxC'];
+    // let windChillMaxF = stats['windChillMaxF'];
+
+    let footerGroup =
+        <ColumnGroup>
+            <Row>
+                <Column footer={t('generic.statistics')} colSpan={1}/>
+                <Column footer="" colSpan={3}/>
+                <Column footer={t('station.full.visibility')} colSpan={1}/>
+                <Column footer={t('station.full.precipitations')} colSpan={1}/>
+                <Column footer={t('station.full.uvIndex')} colSpan={1}/>
+                <Column footer="" colSpan={1}/>
+                <Column footer={t('station.full.airPressure')} colSpan={1}/>
+                <Column footer={t('station.full.relativeHumidity')} colSpan={1}/>
+                <Column footer={t('station.full.airTemperature')} colSpan={1}/>
+                <Column footer={t('station.full.waterLevel')} colSpan={1}/>
+                <Column footer={t('station.full.waterLevelEh2000')} colSpan={1}/>
+                <Column footer={t('station.full.waterTemperature')} colSpan={1}/>
+                <Column footer="" colSpan={1}/>
+                <Column footer={t('station.full.windSpeed')} colSpan={1}/>
+                <Column footer={t('station.full.windSpeedMax')} colSpan={1}/>
+                <Column footer={t('station.full.windChillC')} colSpan={1}/>
+                <Column footer={t('station.full.windChillMaxC')} colSpan={1}/>
+            </Row>
+            <Row>
+                <Column footer={t('generic.min')} colSpan={1}/>
+                <Column footer="" colSpan={3}/>
+                <Column footer={h.getMin(visibility)} colSpan={1}/>
+                <Column footer={h.getMin(precipitations)} colSpan={1}/>
+                <Column footer={h.getMin(uvIndex)} colSpan={1}/>
+                <Column footer="" colSpan={1}/>
+                <Column footer={h.getMin(airPressure)} colSpan={1}/>
+                <Column footer={h.getMin(humidity)} colSpan={1}/>
+                <Column footer={h.getMin(airTemp)} colSpan={1}/>
+                <Column footer={h.getMin(waterLevel)} colSpan={1}/>
+                <Column footer={h.getMin(waterLevelEH2000)} colSpan={1}/>
+                <Column footer={h.getMin(waterTemp)} colSpan={1}/>
+                <Column footer="" colSpan={1}/>
+                <Column footer={h.getMin(windSpeed)} colSpan={1}/>
+                <Column footer={h.getMin(windSpeedMax)} colSpan={1}/>
+                <Column footer={h.getMin(windChillC)} colSpan={1}/>
+                <Column footer={h.getMin(windChillMaxC)} colSpan={1}/>
+            </Row>
+            <Row>
+                <Column footer={t('generic.max')} colSpan={1}/>
+                <Column footer="" colSpan={3}/>
+                <Column footer={h.getMax(visibility)} colSpan={1}/>
+                <Column footer={h.getMax(precipitations)} colSpan={1}/>
+                <Column footer={h.getMax(uvIndex)} colSpan={1}/>
+                <Column footer="" colSpan={1}/>
+                <Column footer={h.getMax(airPressure)} colSpan={1}/>
+                <Column footer={h.getMax(humidity)} colSpan={1}/>
+                <Column footer={h.getMax(airTemp)} colSpan={1}/>
+                <Column footer={h.getMax(waterLevel)} colSpan={1}/>
+                <Column footer={h.getMax(waterLevelEH2000)} colSpan={1}/>
+                <Column footer={h.getMax(waterTemp)} colSpan={1}/>
+                <Column footer="" colSpan={1}/>
+                <Column footer={h.getMax(windSpeed)} colSpan={1}/>
+                <Column footer={h.getMax(windSpeedMax)} colSpan={1}/>
+                <Column footer={h.getMax(windChillC)} colSpan={1}/>
+                <Column footer={h.getMax(windChillMaxC)} colSpan={1}/>
+            </Row>
+            <Row>
+                <Column footer={t('generic.average')} colSpan={1}/>
+                <Column footer="" colSpan={3}/>
+                <Column footer={h.getAvg(visibility)} colSpan={1}/>
+                <Column footer={h.getAvg(precipitations)} colSpan={1}/>
+                <Column footer={h.getAvg(uvIndex)} colSpan={1}/>
+                <Column footer="" colSpan={1}/>
+                <Column footer={h.getAvg(airPressure)} colSpan={1}/>
+                <Column footer={h.getAvg(humidity)} colSpan={1}/>
+                <Column footer={h.getAvg(airTemp)} colSpan={1}/>
+                <Column footer={h.getAvg(waterLevel)} colSpan={1}/>
+                <Column footer={h.getAvg(waterLevelEH2000)} colSpan={1}/>
+                <Column footer={h.getAvg(waterTemp)} colSpan={1}/>
+                <Column footer="" colSpan={1}/>
+                <Column footer={h.getAvg(windSpeed)} colSpan={1}/>
+                <Column footer={h.getAvg(windSpeedMax)} colSpan={1}/>
+                <Column footer={h.getAvg(windChillC)} colSpan={1}/>
+                <Column footer={h.getAvg(windChillMaxC)} colSpan={1}/>
+            </Row>
+            <Row>
+                <Column footer={t('generic.count')} colSpan={1}/>
+                <Column footer="" colSpan={3}/>
+                <Column footer={h.getCount(visibility)} colSpan={1}/>
+                <Column footer={h.getCount(precipitations)} colSpan={1}/>
+                <Column footer={h.getCount(uvIndex)} colSpan={1}/>
+                <Column footer="" colSpan={1}/>
+                <Column footer={h.getCount(airPressure)} colSpan={1}/>
+                <Column footer={h.getCount(humidity)} colSpan={1}/>
+                <Column footer={h.getCount(airTemp)} colSpan={1}/>
+                <Column footer={h.getCount(waterLevel)} colSpan={1}/>
+                <Column footer={h.getCount(waterLevelEH2000)} colSpan={1}/>
+                <Column footer={h.getCount(waterTemp)} colSpan={1}/>
+                <Column footer="" colSpan={1}/>
+                <Column footer={h.getCount(windSpeed)} colSpan={1}/>
+                <Column footer={h.getCount(windSpeedMax)} colSpan={1}/>
+                <Column footer={h.getCount(windChillC)} colSpan={1}/>
+                <Column footer={h.getCount(windChillMaxC)} colSpan={1}/>
+            </Row>
+        </ColumnGroup>;
 
     let dataTablePrimeReact =
         <DataTable
@@ -278,130 +377,17 @@ function Page() {
             <Column key={'wmoCode'} field={'wmoCode'}/>
             <Column key={'airPressure'} field={'airPressure'} body={bodyAirPressure}/>
             <Column key={'relativeHumidity'} field={'relativeHumidity'} body={bodyRelativeHumidity}/>
-            <Column key={'airTemperature'} field={'airTemperature'} body={bodyAirTemp} className='bold'/>
+            <Column key={'airTemperature'} field={'airTemperature'} body={bodyAirTemp}/>
             <Column key={'waterLevel'} field={'waterLevel'} body={bodyWaterLevel}/>
             <Column key={'waterLevelEh2000'} field={'waterLevelEh2000'} body={bodyWaterLevelEh2000}/>
             <Column key={'waterTemperature'} field={'waterTemperature'} body={bodyWaterTemp}/>
             <Column key={'windDirection'} field={'windDirection'} body={bodyWindDirection}/>
-            <Column key={'windSpeed'} field={'windSpeed'} body={bodyWindSpeed} className='bold'/>
+            <Column key={'windSpeed'} field={'windSpeed'} body={bodyWindSpeed}/>
             <Column key={'windSpeedMax'} field={'windSpeedMax'} body={bodyWindSpeedMax}/>
             <Column key={'windChillC'} field={'windChillC'} body={bodyWindChillCF}/>
             <Column key={'windChillMaxC'} field={'windChillMaxC'} body={bodyWindChillMaxCF}/>
         </DataTable>;
 
-    let visibility = stats['visibility'];
-    let uvIndex = stats['uvIndex'];
-    let airPressure = stats['airPressure'];
-    let humidity = stats['humidity'];
-    let airTemp = stats['airTemperature'];
-    let windDir = stats['windDirection'];
-    let windSpeed = stats['windSpeed'];
-    let windSpeedMax = stats['windSpeedMax'];
-    let waterLevel = stats['waterLevel'];
-    let waterLevelEH2000 = stats['waterLevelEH2000'];
-    let waterTemp = stats['waterTemperature'];
-    let windChillC = stats['windChillC'];
-    let windChillF = stats['windChillF'];
-    let windChillMaxC = stats['windChillMaxC'];
-    let windChillMaxF = stats['windChillMaxF'];
-
-    let dataTableAveragesReactStrap =
-        <Table size={"sm"} striped={true} responsive={true} style={{textAlign: "left"}}>
-            <thead>
-            <tr>
-                <td><b>{t('generic.unit')}</b></td>
-                <td>{t('station.full.visibility')}</td>
-                <td>{t('station.full.uvIndex')}</td>
-                <td>{t('station.full.airPressure')}</td>
-                <td>{t('station.full.relativeHumidity')}</td>
-                <td>{t('station.full.airTemperature')}</td>
-                <td>{t('station.full.windDirection')}</td>
-                <td>{t('station.full.windSpeed')}</td>
-                <td>{t('station.full.windSpeedMax')}</td>
-                <td>{t('station.full.waterLevel')}</td>
-                <td>{t('station.full.waterLevelEh2000')}</td>
-                <td>{t('station.full.waterTemperature')}</td>
-                <td>{t('station.full.windChillC')}</td>
-                <td>{t('station.full.windChillF')}</td>
-                <td>{t('station.full.windChillMaxC')}</td>
-                <td>{t('station.full.windChillMaxF')}</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><b>{t('generic.min')}</b></td>
-                <td>{h.getMin(visibility)}</td>
-                <td>{h.getMin(uvIndex)}</td>
-                <td>{h.getMin(airPressure)}</td>
-                <td>{h.getMin(humidity)}</td>
-                <td>{h.getMin(airTemp)}</td>
-                <td>{h.getMin(windDir)}</td>
-                <td>{h.getMin(windSpeed)}</td>
-                <td>{h.getMin(windSpeedMax)}</td>
-                <td>{h.getMin(waterLevel)}</td>
-                <td>{h.getMin(waterLevelEH2000)}</td>
-                <td>{h.getMin(waterTemp)}</td>
-                <td>{h.getMin(windChillC)}</td>
-                <td>{h.getMin(windChillF)}</td>
-                <td>{h.getMin(windChillMaxC)}</td>
-                <td>{h.getMin(windChillMaxF)}</td>
-            </tr>
-            <tr>
-                <td><b>{t('generic.max')}</b></td>
-                <td>{h.getMax(visibility)}</td>
-                <td>{h.getMax(uvIndex)}</td>
-                <td>{h.getMax(airPressure)}</td>
-                <td>{h.getMax(humidity)}</td>
-                <td>{h.getMax(airTemp)}</td>
-                <td>{h.getMax(windDir)}</td>
-                <td>{h.getMax(windSpeed)}</td>
-                <td>{h.getMax(windSpeedMax)}</td>
-                <td>{h.getMax(waterLevel)}</td>
-                <td>{h.getMax(waterLevelEH2000)}</td>
-                <td>{h.getMax(waterTemp)}</td>
-                <td>{h.getMax(windChillC)}</td>
-                <td>{h.getMax(windChillF)}</td>
-                <td>{h.getMax(windChillMaxC)}</td>
-                <td>{h.getMax(windChillMaxF)}</td>
-            </tr>
-            <tr>
-                <td><b>{t('generic.average')}</b></td>
-                <td>{h.getAvg(visibility)}</td>
-                <td>{h.getAvg(uvIndex)}</td>
-                <td>{h.getAvg(airPressure)}</td>
-                <td>{h.getAvg(humidity)}</td>
-                <td>{h.getAvg(airTemp)}</td>
-                <td>{h.getAvg(windDir)}</td>
-                <td>{h.getAvg(windSpeed)}</td>
-                <td>{h.getAvg(windSpeedMax)}</td>
-                <td>{h.getAvg(waterLevel)}</td>
-                <td>{h.getAvg(waterLevelEH2000)}</td>
-                <td>{h.getAvg(waterTemp)}</td>
-                <td>{h.getAvg(windChillC)}</td>
-                <td>{h.getAvg(windChillF)}</td>
-                <td>{h.getAvg(windChillMaxC)}</td>
-                <td>{h.getAvg(windChillMaxF)}</td>
-            </tr>
-            <tr>
-                <td><b>{t('generic.count')}</b></td>
-                <td>{h.getCount(visibility)}</td>
-                <td>{h.getCount(uvIndex)}</td>
-                <td>{h.getCount(airPressure)}</td>
-                <td>{h.getCount(humidity)}</td>
-                <td>{h.getCount(airTemp)}</td>
-                <td>{h.getCount(windDir)}</td>
-                <td>{h.getCount(windSpeed)}</td>
-                <td>{h.getCount(windSpeedMax)}</td>
-                <td>{h.getCount(waterLevel)}</td>
-                <td>{h.getCount(waterLevelEH2000)}</td>
-                <td>{h.getCount(waterTemp)}</td>
-                <td>{h.getCount(windChillC)}</td>
-                <td>{h.getCount(windChillF)}</td>
-                <td>{h.getCount(windChillMaxC)}</td>
-                <td>{h.getCount(windChillMaxF)}</td>
-            </tr>
-            </tbody>
-        </Table>;
 
     return <div className="App">
         <SelectButton value={i18n.language} options={langSelectItems} onChange={(e) => changeLanguage(e.value)}
@@ -418,10 +404,6 @@ function Page() {
                     <br/>
                     <h2>{t('generic.dataset')} <b>{timestamp}</b>:</h2>
                     {dataTablePrimeReact}
-                    <br/>
-                    <h2>{t('generic.statistics')}:</h2>
-                    {dataTableAveragesReactStrap}
-                    <br/>
                 </div>
             </div>
         </div>
