@@ -358,25 +358,44 @@ function Page() {
             footerColumnGroup={footerGroup}
             value={stations} resizableColumns={true}
             scrollable={true} scrollHeight="450px" emptyMessage={t('generic.emptyMessage')}>
-            <Column key={'name'} field={'name'} body={bodyName}/>
-            <Column key={'latitude'} field={'latitude'} body={bodyLatitude}/>
-            <Column key={'longitude'} field={'longitude'} body={bodyLongitude}/>
-            <Column key={'phenomenon'} field={'phenomenon'} body={bodyPhenomenon}/>
-            <Column key={'visibility'} field={'visibility'} body={bodyVisibility}/>
-            <Column key={'precipitations'} field={'precipitations'} body={bodyPrecipitations}/>
-            <Column key={'uvIndex'} field={'uvIndex'}/>
-            <Column key={'wmoCode'} field={'wmoCode'}/>
-            <Column key={'airPressure'} field={'airPressure'} body={bodyAirPressure}/>
-            <Column key={'relativeHumidity'} field={'relativeHumidity'} body={bodyRelativeHumidity}/>
-            <Column key={'airTemperature'} field={'airTemperature'} body={bodyAirTemp}/>
-            <Column key={'waterLevel'} field={'waterLevel'} body={bodyWaterLevel}/>
-            <Column key={'waterLevelEh2000'} field={'waterLevelEh2000'} body={bodyWaterLevelEh2000}/>
-            <Column key={'waterTemperature'} field={'waterTemperature'} body={bodyWaterTemp}/>
-            <Column key={'windDirection'} field={'windDirection'} body={bodyWindDirection}/>
-            <Column key={'windSpeed'} field={'windSpeed'} body={bodyWindSpeed}/>
-            <Column key={'windSpeedMax'} field={'windSpeedMax'} body={bodyWindSpeedMax}/>
-            <Column key={'windChillC'} field={'windChillC'} body={bodyWindChillCF}/>
-            <Column key={'windChillMaxC'} field={'windChillMaxC'} body={bodyWindChillMaxCF}/>
+            <Column key={'name'} field={'name'} body={bodyName}
+                    headerStyle={{width: '11em'}}/>
+            <Column key={'latitude'} field={'latitude'} body={bodyLatitude}
+                    headerStyle={{width: '11em'}}/>
+            <Column key={'longitude'} field={'longitude'} body={bodyLongitude}
+                    headerStyle={{width: '11em'}}/>
+            <Column key={'phenomenon'} field={'phenomenon'} body={bodyPhenomenon}
+                    headerStyle={{width: '15em'}}/>
+            <Column key={'visibility'} field={'visibility'} body={bodyVisibility}
+                    headerStyle={{width: '7em'}}/>
+            <Column key={'precipitations'} field={'precipitations'} body={bodyPrecipitations}
+                    headerStyle={{width: '9em'}}/>
+            <Column key={'uvIndex'} field={'uvIndex'}
+                    headerStyle={{width: '3em'}}/>
+            <Column key={'wmoCode'} field={'wmoCode'}
+                    headerStyle={{width: '5em'}}/>
+            <Column key={'airPressure'} field={'airPressure'} body={bodyAirPressure}
+                    headerStyle={{width: '7em'}}/>
+            <Column key={'relativeHumidity'} field={'relativeHumidity'} body={bodyRelativeHumidity}
+                    headerStyle={{width: '7em'}}/>
+            <Column key={'airTemperature'} field={'airTemperature'} body={bodyAirTemp}
+                    headerStyle={{width: '8em'}}/>
+            <Column key={'waterLevel'} field={'waterLevel'} body={bodyWaterLevel}
+                    headerStyle={{width: '6em'}}/>
+            <Column key={'waterLevelEh2000'} field={'waterLevelEh2000'} body={bodyWaterLevelEh2000}
+                    headerStyle={{width: '6em'}}/>
+            <Column key={'waterTemperature'} field={'waterTemperature'} body={bodyWaterTemp}
+                    headerStyle={{width: '8em'}}/>
+            <Column key={'windDirection'} field={'windDirection'} body={bodyWindDirection}
+                    headerStyle={{width: '8em'}}/>
+            <Column key={'windSpeed'} field={'windSpeed'} body={bodyWindSpeed}
+                    headerStyle={{width: '7em'}}/>
+            <Column key={'windSpeedMax'} field={'windSpeedMax'} body={bodyWindSpeedMax}
+                    headerStyle={{width: '7em'}}/>
+            <Column key={'windChillC'} field={'windChillC'} body={bodyWindChillCF}
+                    headerStyle={{width: '7em'}}/>
+            <Column key={'windChillMaxC'} field={'windChillMaxC'} body={bodyWindChillMaxCF}
+                    headerStyle={{width: '7em'}}/>
         </DataTable>;
 
 
