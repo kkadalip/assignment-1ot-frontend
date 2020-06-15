@@ -1,4 +1,3 @@
-import React from 'react';
 import i18n from "../translations/i18n";
 
 export function getStations(value) {

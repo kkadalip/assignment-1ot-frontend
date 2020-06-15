@@ -37,6 +37,7 @@ function Page() {
             getWeatherStations();
         }, 60000);
         return () => clearInterval(interval);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     let [isLoading, setIsLoading] = useState(true);
@@ -131,7 +132,9 @@ function Page() {
     const bodyLatitude = (rowData) => {
         if (rowData.latitude && rowData.longitude) {
             return <span><a
-                href={getGoogleMapsUrl(rowData.latitude, rowData.longitude)} target="_blank">{rowData.latitude}{'°'}</a></span>
+                href={getGoogleMapsUrl(rowData.latitude, rowData.longitude)}
+                rel="noopener noreferrer"
+                target="_blank">{rowData.latitude}{'°'}</a></span>
         } else if (rowData.latitude) {
             return <span>{rowData.latitude}{'°'}</span>
         }
@@ -141,6 +144,7 @@ function Page() {
         if (rowData.latitude && rowData.longitude) {
             return <span><a
                 href={getGoogleMapsUrl(rowData.latitude, rowData.longitude)}
+                rel="noopener noreferrer"
                 target="_blank">{rowData.longitude}{'°'}</a></span>
         } else if (rowData.longitude) {
             return <span>{rowData.longitude}{'°'}</span>
