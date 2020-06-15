@@ -1,6 +1,7 @@
 {
   "title": {
-    "main": "Estonian weather stations"
+    "main": "Estonian weather stations",
+    "subtitle": "Dataset time"
   },
   "header": {
     "geo": "Geo",
@@ -92,7 +93,6 @@
   },
   "generic": {
     "windChill": "Wind chill",
-    "dataset": "Dataset",
     "averages": "Averages",
     "pressure": "Pressure",
     "humidity": "Humidity",

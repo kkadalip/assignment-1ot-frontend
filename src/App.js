@@ -357,7 +357,7 @@ function Page() {
             headerColumnGroup={headerGroup}
             footerColumnGroup={footerGroup}
             value={stations} resizableColumns={true}
-            scrollable={true} scrollHeight="600px" emptyMessage={t('generic.emptyMessage')}>
+            scrollable={true} scrollHeight="450px" emptyMessage={t('generic.emptyMessage')}>
             <Column key={'name'} field={'name'} body={bodyName}/>
             <Column key={'latitude'} field={'latitude'} body={bodyLatitude}/>
             <Column key={'longitude'} field={'longitude'} body={bodyLongitude}/>
@@ -386,14 +386,15 @@ function Page() {
         <div id="floating-box-main" className="floating-box">
             <div className={"title-and-main"}>
                 <header>
-                    <p className="unselectable title-big">{t('title.main')}</p>
+                    <div className="unselectable title-big">
+                        <span>{t('title.main')}</span>
+                    </div>
                 </header>
                 <div hidden={!isLoading}>
                     <ProgressSpinner/>
                 </div>
                 <div hidden={isLoading}>
-                    <br/>
-                    <h2>{t('generic.dataset')} <b>{timestamp}</b>:</h2>
+                    <div> {t('title.subtitle')} <b>{timestamp}</b></div>
                     {dataTablePrimeReact}
                 </div>
             </div>
