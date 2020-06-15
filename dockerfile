@@ -18,7 +18,5 @@ COPY . .
 # Uses port which is used by the actual application
 EXPOSE 3000
 
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-
 # Finally runs the application
 CMD [ "npm", "start" ]
