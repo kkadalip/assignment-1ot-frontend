@@ -422,7 +422,13 @@ function Page() {
         <div>
             {forecasts.map((forecast, i) => {
                 return (
-                    <div key={i} style={{textAlign: 'left', width: '100%', paddingLeft: '30px'}}>
+                    <div key={i} style={{
+                        textAlign: 'left',
+                        width: '50%',
+                        paddingLeft: '30px',
+                        paddingRight: '30px',
+                        margin: 'auto',
+                    }}>
                         <div>
                             <u><h3>Date: {forecast.date}</h3></u>
                         </div>
