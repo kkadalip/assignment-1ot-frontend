@@ -7,6 +7,13 @@ export function getStations(value) {
     return value.stations;
 }
 
+export function getForecasts(value) {
+    if (value === undefined) {
+        return [];
+    }
+    return value.forecasts;
+}
+
 export function getStatistics(value) {
     if (value === undefined) {
         return [];

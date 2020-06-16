@@ -27,37 +27,57 @@ function Page() {
         {label: 'Eesti', value: 'et'}
     ];
 
-    const stationsUrl = 'http://localhost:8090/api/stations'
+    const urlStations = 'http://localhost:8090/api/stations'
+    const urlForecasts = 'http://localhost:8090/api/forecasts'
 
     useEffect(() => {
         const savedLanguage = localStorage.getItem('SelectedLanguage') || 'en';
         changeLanguage(savedLanguage);
-        getWeatherStations();
+        getStations();
+        getForecasts();
         const interval = setInterval(() => {
-            getWeatherStations();
+            getStations();
+            getForecasts();
         }, 60000);
         return () => clearInterval(interval);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    let [isLoading, setIsLoading] = useState(true);
+    let [isLoadingStations, setIsLoadingStations] = useState(true);
+    let [isLoadingForecasts, setIsLoadingForecasts] = useState(true);
     let [stations, setStations] = useState([]);
     let [stats, setStatistics] = useState([]);
     let [timestamp, setTimestamp] = useState('');
 
-    const getWeatherStations = () => {
-        axios.get(stationsUrl)
+    let [forecasts, setForecasts] = useState([]);
+
+    const getStations = () => {
+        axios.get(urlStations)
             .then(res => res.data[res.data.length - 1])
             .then(data => {
-                    setIsLoading(false);
+                    setIsLoadingStations(false);
                     setStations(h.getStations(data));
                     setStatistics(h.getStatistics(data));
                     setTimestamp(h.convertTimestampToDate(h.getTimestamp(data)));
-                    // console.log("Data is: ", data);
+                    //console.log("Stations data is: ", data);
                 }
             )
             .catch((err) => {
-                console.log("Could not fetch data", err);
+                console.log("Could not fetch stations data ", err);
+            }, [])
+    };
+
+    const getForecasts = () => {
+        axios.get(urlForecasts)
+            .then(res => res.data[res.data.length - 1])
+            .then(data => {
+                    setIsLoadingForecasts(false);
+                    setForecasts(h.getForecasts(data));
+                    //console.log("Forecasts data is: ", data);
+                }
+            )
+            .catch((err) => {
+                console.log("Could not fetch forecasts data", err);
             }, [])
     };
 
@@ -352,12 +372,12 @@ function Page() {
             </Row>
         </ColumnGroup>;
 
-    let dataTablePrimeReact =
+    let tableStations =
         <DataTable
             headerColumnGroup={headerGroup}
             footerColumnGroup={footerGroup}
             value={stations} resizableColumns={true}
-            scrollable={true} scrollHeight="450px" emptyMessage={t('generic.emptyMessage')}>
+            scrollable={true} scrollHeight="350px" emptyMessage={t('generic.emptyMessage')}>
             <Column key={'name'} field={'name'} body={bodyName}
                     headerStyle={{width: '11em'}}/>
             <Column key={'latitude'} field={'latitude'} body={bodyLatitude}
@@ -398,6 +418,145 @@ function Page() {
                     headerStyle={{width: '7em'}}/>
         </DataTable>;
 
+    let tableForecasts =
+        <div>
+            {forecasts.map((forecast, i) => {
+                return (
+                    <div key={i} style={{textAlign: 'left', width: '100%', paddingLeft: '30px'}}>
+                        <div>
+                            <u><h3>Date: {forecast.date}</h3></u>
+                        </div>
+                        <div>
+                            <h3>Night:</h3>
+                            <div hidden={!forecast.night.phenomenon}>
+                                <b>Phenomenon:</b> {forecast.night.phenomenon}
+                            </div>
+                            <div hidden={!forecast.night.tempMin}>
+                                <b>Air temp min:</b> {forecast.night.tempMin}°C
+                            </div>
+                            <div hidden={!forecast.night.tempMax}>
+                                <b>Air temp max:</b> {forecast.night.tempMax}°C
+                            </div>
+                            <div hidden={!forecast.night.text}>
+                                <b>Text:</b> {forecast.night.text}
+                            </div>
+                            <div hidden={!forecast.night.sea}>
+                                <b>Sea:</b> {forecast.night.sea}
+                            </div>
+                            <div hidden={!forecast.night.peipsi}>
+                                <b>Lake Peipsi:</b> {forecast.night.peipsi}
+                            </div>
+                            <div hidden={!(forecast.night.places && forecast.night.places.length > 0)}>
+                                <div><h5>Places: </h5></div>
+                                {
+                                    (forecast.night.places && forecast.night.places.length > 0) ?
+                                        (
+                                            forecast.night.places.map((place) => {
+                                                return (
+                                                    <div style={{marginBottom: '5px', fontSize: '0.8em'}}>
+                                                        <div>Name: <b>{place.name}</b></div>
+                                                        <div
+                                                            hidden={!place.phenomenon}>Phenomenon: {place.phenomenon}</div>
+                                                        <div hidden={!place.tempMin}>Temp min: {place.tempMin}°C</div>
+                                                        <div hidden={!place.tempMax}>Temp max: {place.tempMax}°C</div>
+                                                    </div>
+                                                );
+                                            })
+                                        ) : (<div></div>)
+                                }
+                            </div>
+                            <div hidden={!(forecast.night.winds && forecast.night.winds.length > 0)}>
+                                <div><h5>Winds:</h5></div>
+                                {
+                                    (forecast.night.winds && forecast.night.winds.length > 0) ?
+                                        (
+                                            forecast.night.winds.map((place) => {
+                                                return (
+                                                    <div hidden={!place.name}
+                                                         style={{marginBottom: '5px', fontSize: '0.8em'}}>
+                                                        <div>Name: <b>{place.name}</b></div>
+                                                        <div
+                                                            hidden={!place.direction}>Direction: {place.direction}</div>
+                                                        <div hidden={!place.speedMin}>Speed min: {place.speedMin}m/s
+                                                        </div>
+                                                        <div hidden={!place.speedMax}>Speed max: {place.speedMax}m/s
+                                                        </div>
+                                                        <div hidden={!place.gust}>Gust: {place.gust}m/s</div>
+                                                    </div>
+                                                );
+                                            })
+                                        ) : (<div/>)
+                                }
+                            </div>
+                        </div>
+                        <div>
+                            <h3>Day:</h3>
+                            <div hidden={!forecast.day.phenomenon}>
+                                <b>Phenomenon:</b> {forecast.day.phenomenon}
+                            </div>
+                            <div hidden={!forecast.day.tempMin}>
+                                <b>Air temp min:</b> {forecast.day.tempMin}°C
+                            </div>
+                            <div hidden={!forecast.day.tempMax}>
+                                <b>Air temp max:</b> {forecast.day.tempMax}°C
+                            </div>
+                            <div hidden={!forecast.day.text}>
+                                <b>Text:</b> {forecast.day.text}
+                            </div>
+                            <div hidden={!forecast.day.sea}>
+                                <b>Sea:</b> {forecast.day.sea}
+                            </div>
+                            <div hidden={!forecast.day.peipsi}>
+                                <b>Lake Peipsi:</b> {forecast.day.peipsi}
+                            </div>
+                            <div hidden={!(forecast.day.places && forecast.day.places.length > 0)}>
+                                <div><h5>Places: </h5></div>
+                                {
+                                    (forecast.day.places && forecast.day.places.length > 0) ?
+                                        (
+                                            forecast.day.places.map((place) => {
+                                                return (
+                                                    <div style={{marginBottom: '5px', fontSize: '0.8em'}}>
+                                                        <div>Name: <b>{place.name}</b></div>
+                                                        <div
+                                                            hidden={!place.phenomenon}>Phenomenon: {place.phenomenon}</div>
+                                                        <div hidden={!place.tempMin}>Temp min: {place.tempMin}°C</div>
+                                                        <div hidden={!place.tempMax}>Temp max: {place.tempMax}°C</div>
+                                                    </div>
+                                                );
+                                            })
+                                        ) : (<div></div>)
+                                }
+                            </div>
+                            <div hidden={!(forecast.day.winds && forecast.day.winds.length > 0)}>
+                                <div><h5>Winds:</h5></div>
+                                {
+                                    (forecast.day.winds && forecast.day.winds.length > 0) ?
+                                        (
+                                            forecast.day.winds.map((place) => {
+                                                return (
+                                                    <div hidden={!place.name}
+                                                         style={{marginBottom: '5px', fontSize: '0.8em'}}>
+                                                        <div>Name: <b>{place.name}</b></div>
+                                                        <div
+                                                            hidden={!place.direction}>Direction: {place.direction}</div>
+                                                        <div hidden={!place.speedMin}>Speed min: {place.speedMin}m/s
+                                                        </div>
+                                                        <div hidden={!place.speedMax}>Speed max: {place.speedMax}m/s
+                                                        </div>
+                                                        <div hidden={!place.gust}>Gust: {place.gust}m/s</div>
+                                                    </div>
+                                                );
+                                            })
+                                        ) : (<div/>)
+                                }
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                )
+            })}
+        </div>;
 
     return <div className="App">
         <SelectButton value={i18n.language} options={langSelectItems} onChange={(e) => changeLanguage(e.value)}
@@ -409,12 +568,22 @@ function Page() {
                         <span>{t('title.main')}</span>
                     </div>
                 </header>
-                <div hidden={!isLoading}>
+                <div hidden={!isLoadingStations}>
                     <ProgressSpinner/>
                 </div>
-                <div hidden={isLoading}>
+                <div hidden={isLoadingStations}>
                     <div> {t('title.subtitle')} <b>{timestamp}</b></div>
-                    {dataTablePrimeReact}
+                    {tableStations}
+                </div>
+                <div hidden={!isLoadingForecasts}>
+                    <br/>
+                    <h3>{t('title.forecasts')}</h3>
+                    <ProgressSpinner/>
+                </div>
+                <div hidden={isLoadingForecasts}>
+                    <br/>
+                    <h3>{t('title.forecasts')}</h3>
+                    {tableForecasts}
                 </div>
             </div>
         </div>

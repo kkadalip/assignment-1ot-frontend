@@ -1,7 +1,8 @@
 {
   "title": {
     "main": "Estonian weather stations",
-    "subtitle": "Dataset time"
+    "subtitle": "Dataset time",
+    "forecasts": "Weather forecasts"
   },
   "header": {
     "geo": "Geo",

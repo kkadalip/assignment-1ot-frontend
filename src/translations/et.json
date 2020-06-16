@@ -1,7 +1,8 @@
 {
   "title": {
     "main": "Eesti ilmajaamad",
-    "subtitle": "Andmekogu kellaaeg"
+    "subtitle": "Andmekogu kellaaeg",
+    "forecasts": "Ilmaennustused"
   },
   "header": {
     "geo": "Geo",
