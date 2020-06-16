@@ -27,7 +27,7 @@ function Page() {
         {label: 'Eesti', value: 'et'}
     ];
 
-    const stationsUrl = 'http://localhost:8090/stations'
+    const stationsUrl = 'http://localhost:8090/api/stations'
 
     useEffect(() => {
         const savedLanguage = localStorage.getItem('SelectedLanguage') || 'en';
